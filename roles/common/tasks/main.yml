@@ -1,0 +1,18 @@
+---
+# tasks file for common
+- name: Configure Hostname
+  hostname: name={{ inventory_hostname }}
+
+- name: Install deltarpm
+  yum: name=deltarpm state=latest
+  tags: packages
+
+- name: Install pre-requisites
+  yum: name=bash-completion,wget,vim-enhanced,epel-release state=latest
+  tags: packages
+
+- name: Update 
+  yum: name=* state=latest
+  tags: packages
+  
+- include: patch.yml

@@ -1,0 +1,13 @@
+---
+        # Default Ansible YAML
+- name: apply common configuration to all nodes
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+
+- name: install foreman 
+  hosts: master
+  remote_user: root
+  roles:
+    - foreman
