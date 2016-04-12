@@ -1,0 +1,33 @@
+
+- name: NFS install
+  yum: name=nfs-utils state=present
+
+- name: Configure NFS services
+  service: name=rpcbind state=started enabled=yes
+
+- name: Configure NFS services
+  service: name=nfs-server state=started enabled=yes
+
+- name: Configure NFS Firewall
+  firewalld: service=nfs state=enabled permanent=true immediate=yes
+  
+- name: Configure NFS Firewall
+  firewalld: service=rpc-bind state=enabled permanent=true immediate=yes
+  
+- name: Configure NFS Firewall
+  firewalld: service=mountd state=enabled permanent=true immediate=yes
+
+- name: Create Mount point
+  file: path=/var/mnt/centos/7 state=directory
+
+- name: Create Mount point
+  file: path=/var/mnt/rhel/7.2 state=directory
+  
+- name: Create Mount point
+  file: path=/var/mnt/rhel/repos state=directory
+
+- name: Configure mounts
+  template: src=../templates/nfs-exports.j2 dest=/etc/exports
+  notify:
+  - restart nfs
+

@@ -1,0 +1,36 @@
+## Install Docker
+
+- name: Docker installed
+  yum: name=docker state=latest
+
+- name: Config storage template
+  template: src=../templates/docker-storage-setup.j2 dest=/etc/sysconfig/docker-storage-setup
+
+### Generify this to creat a partition based on variables
+- name: Check for Docker partition
+  command: parted -s /dev/sda print 3
+  register: part
+  failed_when: part.rc is not defined
+  changed_when: >
+    part.stdout == "Error: Partition doesn't exist."
+    
+- name: Create Partition
+  script: disk.sh /dev/sda
+  when: part.rc != 0
+
+- name: Create Docker VG
+  lvg: vg=docker pvs=/dev/sda3 state=present
+
+- name: Check pre-req 
+  command: vgs docker
+  register: vgdocker
+
+- name: Docker Storage
+  command: docker-storage-setup
+  when: vgdocker.rc == 0
+
+- name: Enable Docker Storage setup Service
+  service: name=docker-storage-setup enabled=yes
+  
+- name: Enable Docker Service
+  service: name=docker enabled=yes state=started

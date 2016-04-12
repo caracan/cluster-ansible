@@ -1,0 +1,14 @@
+- name: Disks!
+  hosts: master
+  tasks:
+    - name: Check for sda3
+      command: parted -s /dev/sda print 3
+      register: sda3
+      failed_when: sda3.rc is not defined
+      changed_when: >
+        sda3.stdout == "Error: Partition doesn't exist."
+    - name: Create sda3
+      script: disk.sh 
+      when: sda3.rc != 0
+    - name: Create Docker VG
+      lvg: vg=docker pvs=/dev/sda3 state=present

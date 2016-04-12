@@ -6,8 +6,14 @@
   roles:
     - common
 
-- name: install foreman 
+- name: Master Configurations
   hosts: master
   remote_user: root
   roles:
-    - foreman
+    - master
+
+- name: Docker Config
+  hosts: master
+  remote_user: root
+  roles:
+    - docker

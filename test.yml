@@ -1,0 +1,7 @@
+---
+        # Default Ansible YAML
+- name: Docker Config
+  hosts: master
+  remote_user: root
+  roles:
+    - docker

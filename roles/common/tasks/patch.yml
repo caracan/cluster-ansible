@@ -5,7 +5,6 @@
 - name: Update server
   yum: name=* state=latest
 
-
 - name: Check for reboot
   shell: if [ $(rpm -q --last kernel | head -1 |cut -f1 -d " "| sed s/kernel-*//) != $(uname -r) ]; then echo 'reboot'; else echo 'no_reboot'; fi
   register: reboot_hint

@@ -1,0 +1,19 @@
+##
+# Main config file for the master node setup
+##
+- name: Configure firewall masquerade
+  command: firewall-cmd --add-masquerade --permanent
+
+- name: Reload FW
+  command: firewall-cmd --reload
+
+- name: Add IP forwarding
+  sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes state=present reload=yes
+
+- name: Setup hosts file
+  template: src=../templates/hosts.j2 dest=/etc/hosts
+
+- include: foreman.yml
+
+- include: nfs.yml
+

@@ -1,0 +1,22 @@
+- name: Install Foreman repo
+  yum: name=http://yum.theforeman.org/releases/1.11/el7/x86_64/foreman-release.rpm state=present
+  tags: packages
+
+- name: Install Foreman installer
+  yum: name=foreman-installer state=latest
+  tags: packages
+
+- name: Foreman Firewall ports (HTTP)
+  firewalld: service=http permanent=true state=enabled
+- name: Foreman Firewall ports (HTTPS)
+  firewalld: service=https permanent=true state=enabled
+- name: Foreman Firewall ports (DNS)
+  firewalld: service=dns permanent=true state=enabled
+- name: Foreman Firewall ports (DHCP/TFTP)
+  firewalld: port=67-69/udp permanent=true state=enabled
+- name: Foreman Firewall ports (Puppet Master)
+  firewalld: port=8140/tcp permanent=true state=enabled
+- name: Foreman Firewall ports (Smart Proxy)
+  firewalld: port=8443/tcp permanent=true state=enabled
+- name: Foreman Firewall ports (VNC Consoles)
+  firewalld: port=5910-5930/tcp permanent=true state=enabled
