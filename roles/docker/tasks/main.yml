@@ -1,7 +1,7 @@
 ## Install Docker
 
 - name: Docker installed
-  yum: name=docker state=latest
+  yum: name=docker state=present
 
 - name: Config storage template
   template: src=../templates/docker-storage-setup.j2 dest=/etc/sysconfig/docker-storage-setup
