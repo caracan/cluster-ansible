@@ -17,3 +17,9 @@
   remote_user: root
   roles:
     - docker
+
+- name: Virt Config
+  hosts: virt
+  remote_user: root
+  roles:
+    - virt
