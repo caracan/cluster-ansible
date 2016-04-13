@@ -1,0 +1,4 @@
+#Extra useful packages for the master
+
+- name: Install Extra useful packages
+  yum: name=git,iftop,iotop,nmap,ansible state=present

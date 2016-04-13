@@ -1,0 +1,15 @@
+- name: Disks!
+  hosts: nodes 
+  tasks:
+    - name: Masq En
+      command : firewall-cmd --query-masquerade
+      register: masq
+      failed_when: masq.rc is not defined
+      changed_when: masq.stdout != "yes"
+    - name: Check for sda3
+      command: firewall-cmd --add-masquerade --permanent 
+      register: reload
+      when: masq.stdout != "yes"
+    - name: Reload
+      command: firewall-cmd --reload
+      when: reload.rc is defined
