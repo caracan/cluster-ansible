@@ -1,0 +1,4 @@
+virt_sysctl:
+- cmd: net.bridge.bridge-nf-call-ip6tables
+- cmd: net.bridge.bridge-nf-call-iptables
+- cmd: net.bridge.bridge-nf-call-arptables
