@@ -5,3 +5,9 @@
 
 [nodes]
 two.cluster.caracan.local  ansible_ssh_user=root
+three.cluster.caracan.local  ansible_ssh_user=root
+four.cluster.caracan.local  ansible_ssh_user=root
+five.cluster.caracan.local  ansible_ssh_user=root
+six.cluster.caracan.local  ansible_ssh_user=root
+seven.cluster.caracan.local  ansible_ssh_user=root
+eight.cluster.caracan.local  ansible_ssh_user=root
