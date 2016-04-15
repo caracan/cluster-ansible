@@ -11,4 +11,6 @@
   yum: name=bash-completion,wget,vim-enhanced,epel-release,lm_sensors state=present
   tags: packages
 
+- name: Log Rotate syslog file
+  template: src=../templates/syslog.j2 dest=/etc/logrotate.d/syslog
 - include: patch.yml
