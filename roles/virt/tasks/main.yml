@@ -20,7 +20,7 @@
   template: src=../templates/enp3s0.js dest=/etc/sysconfig/network-scripts/ifcfg-enp3s0
 
 - name: Add Bridge
-  template: src=../templates/br0.js dest=/etc/sysconfig/network-scripts/ifcfg-br0
+  template: src=../templates/br0.enp3s0.js dest=/etc/sysconfig/network-scripts/ifcfg-br0.enp3s0
   notify:
   - restart network
 

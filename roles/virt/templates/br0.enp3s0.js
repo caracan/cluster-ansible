@@ -1,4 +1,4 @@
-DEVICE=br0
+DEVICE=br0.enp3s0
 TYPE=Bridge
 BOOTPROTO=dhcp
 ONBOOT=yes
